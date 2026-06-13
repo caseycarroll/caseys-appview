@@ -1,0 +1,27 @@
+{
+  "name": "caseys-appview",
+  "version": "1.0.0",
+  "description": "Simplistic app view that render's a bsky profile's main timeline. Opening a post triggers a View Transition to the post page and renders the post's thread.",
+  "homepage": "https://github.com/caseycarroll/caseys-appview#readme",
+  "bugs": {
+    "url": "https://github.com/caseycarroll/caseys-appview/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caseycarroll/caseys-appview.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@atproto/lex": "^0.1.3",
+    "@atproto/oauth-client-node": "^0.4.1",
+    "@types/node": "^25.9.3",
+    "open": "^11.0.0",
+    "typescript": "^6.0.3"
+  }
+}
