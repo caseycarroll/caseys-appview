@@ -2,18 +2,20 @@ import http from 'node:http'
 import { NodeOAuthClient, buildAtprotoLoopbackClientMetadata } from '@atproto/oauth-client-node'
 import type { NodeSavedSession, NodeSavedState } from '@atproto/oauth-client-node'
 import { Client } from '@atproto/lex'
+import { Agent } from '@atproto/api'
 import open from 'open'
 import * as app from './lexicons/app.js'
+
+const SCOPE = 'atproto rpc:app.bsky.feed.getTimeline?aud=did:web:api.bsky.app#bsky_appview'
 
 const stateStore = new Map<string, NodeSavedState>()
 const sessionStore = new Map<string, NodeSavedSession>()
 
 const oauthClient = new NodeOAuthClient({
   clientMetadata: buildAtprotoLoopbackClientMetadata({
-    scope: 'atproto',
+    scope: SCOPE,
     redirect_uris: ['http://127.0.0.1:3000/callback'],
   }),
-  fetch: globalThis.fetch.bind(globalThis),
   stateStore: {
     async get(key: string) { return stateStore.get(key) },
     async set(key: string, value: NodeSavedState) { stateStore.set(key, value) },
@@ -29,7 +31,7 @@ const oauthClient = new NodeOAuthClient({
 async function login(handle: string) {
   // Start the OAuth flow — this resolves the handle, finds their auth
   // server (PDS), and returns a URL to redirect the user to
-  const authUrl = await oauthClient.authorize(handle, { scope: 'atproto' })
+  const authUrl = await oauthClient.authorize(handle, { scope: SCOPE })
 
   // Wait for the callback from the authorization server
   const params = await new Promise<URLSearchParams>((resolve, reject) => {
@@ -78,6 +80,12 @@ async function main() {
   console.log(`  DID: ${session.did}`)
   console.log(`  Display name: ${profile.value?.displayName ?? '(not set)'}`)
   console.log(`  Description: ${profile.value?.description ?? '(not set)'}`)
+  
+  const agent = new Agent(session);
+  const timeline = await agent.getTimeline({ limit: 20 })
+  const timelineData = await timeline.data
+
+  console.log(JSON.stringify(timelineData))
 }
 
 main().catch((err) => {
