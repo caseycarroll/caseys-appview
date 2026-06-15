@@ -6,7 +6,7 @@ static const feed: app.bsky.feed.getTimeline.$OutputBody = mockFeed;
 <h1>Casey's App View</h1>
 
 <for|post| of=feed.feed>
-  <div>
+  <a href=`post/${post.post.uri.slice(post.post.uri.lastIndexOf('/') + 1)}`>
     <p>
       ${post.post.author.displayName}
     </p>
@@ -14,5 +14,5 @@ static const feed: app.bsky.feed.getTimeline.$OutputBody = mockFeed;
       ${post.post.record.text}
     </p>
     <hr>
-  </div>
+  </a>
 </for>
