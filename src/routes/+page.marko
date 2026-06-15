@@ -1,1 +1,18 @@
-<h1>Hello</h1>
+import mockFeed from '../../mocks/mock_timeline.json';
+import * as app from '../lexicons/app.js'
+
+static const feed: app.bsky.feed.getTimeline.$OutputBody = mockFeed;
+
+<h1>Casey's App View</h1>
+
+<for|post| of=feed.feed>
+  <div>
+    <p>
+      ${post.post.author.displayName}
+    </p>
+    <p>
+      ${post.post.record.text}
+    </p>
+    <hr>
+  </div>
+</for>
