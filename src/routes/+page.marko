@@ -1,20 +1,34 @@
-import mockFeed from '../../mocks/mock_timeline.json';
-import * as app from '../lexicons/app.js'
+import { AtUri } from "@atproto/syntax";
+import mockFeed from "../../mocks/mock_timeline.json";
+import * as app from "../lexicons/app.js";
 
-// temp hack until real data
-// many values align but are typed as strings bc json 
-static const feed = mockFeed as app.bsky.feed.getTimeline.$OutputBody;
+static async function getTimeline() {
+  return new Promise<app.bsky.feed.getTimeline.$OutputBody>((resolve) =>
+    setTimeout(
+      () => resolve(mockFeed as app.bsky.feed.getTimeline.$OutputBody),
+      100,
+    ),
+  );
+}
 
 <h1>Casey's App View</h1>
 
-<for|post| of=feed.feed>
-  <a href=`post/${post.post.uri.slice(post.post.uri.lastIndexOf('/') + 1)}`>
-    <p>
-      ${post.post.author.displayName}
-    </p>
-    <p>
-      ${post.post.record.text}
-    </p>
-    <hr>
-  </a>
-</for>
+<await|timeline|=getTimeline()>
+  <for|{ post }| of=timeline.feed>
+    <const/uri=new AtUri(post.uri)>
+    <const/hostname=uri.hostname>
+    <const/rkey=uri.rkey>
+    <a href=`post/${hostname}/${rkey}`>
+      <p>${post.author.displayName}</p>
+      <p>${post.record.text}</p>
+      <hr>
+    </a>
+  </for>
+</await>
+
+<style>
+  a:has(p) {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
