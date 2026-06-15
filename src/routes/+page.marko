@@ -10,10 +10,12 @@ static async function getTimeline() {
   );
 }
 
-<h1>Casey's App View</h1>
+<section>
+  <h1>Casey's App View</h1>
 
-<await|timeline|=getTimeline()>
-  <for|{ post }| of=timeline.feed>                                
-    <post post=post />
-  </for>
-</await>
+  <await|timeline|=getTimeline()>
+    <for|{ post }| of=timeline.feed>                                
+      <post post=post />
+    </for>
+  </await>
+</section>

@@ -1,4 +1,4 @@
-@layer reset;
+@layer reset, utilities, default;
 
 @layer reset {
     /* Box sizing rules */

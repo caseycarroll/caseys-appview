@@ -1,0 +1,11 @@
+@layer layout {
+    body {
+        display: grid;
+        grid-template-columns: minmax(1rem, 1fr) minmax(0,60ch) minmax(1rem, 1fr);
+        grid-template-areas: ". main .";
+    }
+
+    section {
+        grid-area: main;
+    }
+}
