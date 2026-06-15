@@ -1,0 +1,25 @@
+import mockFeed from "../../../mocks/mock_timeline.json";
+import * as app from "../../lexicons/app.js";
+
+static async function getTimeline() {
+  return new Promise<app.bsky.feed.getTimeline.$OutputBody>((resolve) =>
+    setTimeout(
+      () => resolve(mockFeed as app.bsky.feed.getTimeline.$OutputBody),
+      100,
+    ),
+  );
+}
+
+<section>
+  <h1>Casey's App View</h1>
+
+  <await|timeline|=getTimeline()>
+    <ul role="list" class="flow flow--large">
+      <for|{ post }| of=timeline.feed>
+        <li>
+          <post post=post />
+        </li>
+      </for>
+    </ul>
+  </await>
+</section>
