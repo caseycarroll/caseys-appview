@@ -74,4 +74,8 @@
     :target {
       scroll-margin-block: 5ex;
     }
+
+    p {
+      margin-block-start: 0;
+    }
 }    

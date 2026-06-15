@@ -14,7 +14,12 @@ export interface Input {
 <const/hostname=uri.hostname>
 <const/rkey=uri.rkey>
 <a href=`post/${hostname}/${rkey}` class="flow">
-    <p class="text-bold">${input.post.author.displayName}</p>
+    <div class="cluster cluster--small">
+      <avatar 
+        src=`${input.post.author.avatar || ''}`
+        alt=`Avatar of ${input.post.author.displayName}`/>
+      <p class="text-bold">${input.post.author.displayName}</p>
+    </div>
     <p>${input.post.record.text}</p>
 </a>
 

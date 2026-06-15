@@ -1,4 +1,8 @@
 @layer layout {
+    :root {
+        --flow-space: 1em;
+    }
+    
     body {
         display: grid;
         grid-template-columns: minmax(1rem, 1fr) minmax(0,60ch) minmax(1rem, 1fr);
@@ -7,5 +11,30 @@
 
     section {
         grid-area: main;
+    }
+
+    .flow {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .flow > * {
+        margin-block: 0;
+    }
+
+    .flow > * + * {
+        margin-block-start: var(--flow-space, 1em);
+    }
+
+    .cluster {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--flow-space, 1em);
+
+        &[class$=small] {
+            --flow-space: 0.5em
+        }
     }
 }
