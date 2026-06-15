@@ -13,10 +13,9 @@ export interface Input {
 <const/uri=new AtUri(input.post.uri)>
 <const/hostname=uri.hostname>
 <const/rkey=uri.rkey>
-<a href=`post/${hostname}/${rkey}`>
+<a href=`post/${hostname}/${rkey}` class="flow">
     <p class="text-bold">${input.post.author.displayName}</p>
     <p>${input.post.record.text}</p>
-    <hr>
 </a>
 
 <style>
