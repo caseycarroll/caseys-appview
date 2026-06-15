@@ -1,7 +1,9 @@
 import mockFeed from '../../mocks/mock_timeline.json';
 import * as app from '../lexicons/app.js'
 
-static const feed: app.bsky.feed.getTimeline.$OutputBody = mockFeed;
+// temp hack until real data
+// many values align but are typed as strings bc json 
+static const feed = mockFeed as app.bsky.feed.getTimeline.$OutputBody;
 
 <h1>Casey's App View</h1>
 
