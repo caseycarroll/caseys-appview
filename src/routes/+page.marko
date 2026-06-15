@@ -1,25 +1,42 @@
-import mockFeed from "../../mocks/mock_timeline.json";
-import * as app from "../lexicons/app.js";
+import { Agent } from '@atproto/api'
+import type { OAuthSession } from "@atproto/oauth-client-node";
 
-static async function getTimeline() {
-  return new Promise<app.bsky.feed.getTimeline.$OutputBody>((resolve) =>
-    setTimeout(
-      () => resolve(mockFeed as app.bsky.feed.getTimeline.$OutputBody),
-      100,
-    ),
-  );
+static async function getTimeline(session: OAuthSession) {
+  const agent = new Agent(session);
+  const timeline = await agent.getTimeline({limit: 20})
+  return timeline.data;
 }
+<if=$global.session>
+  <section>
+    <h1>Timeline</h1>
+    <await|timeline|=getTimeline($global.session)>
+      <ul role="list" class="flow flow--large">
+        <for|{ post }| of=timeline.feed>
+          <li>
+            <post post=post />
+          </li>
+        </for>
+      </ul>
+    </await>
+  </section>
+</if>
+<else>
+  <section class="center flow">
+    <h1>Login</h1>
 
-<section>
-  <h1>Casey's App View</h1>
-
-  <await|timeline|=getTimeline()>
-    <ul role="list" class="flow flow--large">
-      <for|{ post }| of=timeline.feed>
-        <li>
-          <post post=post />
-        </li>
-      </for>
-    </ul>
-  </await>
-</section>
+    <let/handle="">
+    <form class="flow" method="post" action="/login">
+        <div class="flow">
+            <label class="text-bold" for="login">
+                atproto handle:
+            </label>
+            <input name="login" type="text" value=handle valueChange(newHandle) {
+                handle = newHandle;
+            } />
+        </div>
+        <button type="submit">
+            Login
+        </button>
+    </form>
+  </section>
+</else>

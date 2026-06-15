@@ -38,7 +38,11 @@
         gap: var(--flow-space, 1em);
 
         &[class$=small] {
-            --flow-space: 0.5em
+            --flow-space: 0.5em;
         }
+    }
+
+    .center {
+        justify-content: center;
     }
 }

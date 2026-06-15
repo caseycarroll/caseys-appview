@@ -1,0 +1,1 @@
+export const SCOPE = 'atproto rpc:app.bsky.feed.getTimeline?aud=did:web:api.bsky.app#bsky_appview'
