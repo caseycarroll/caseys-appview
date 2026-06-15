@@ -1,4 +1,3 @@
-import { AtUri } from "@atproto/syntax";
 import mockFeed from "../../mocks/mock_timeline.json";
 import * as app from "../lexicons/app.js";
 
@@ -14,21 +13,7 @@ static async function getTimeline() {
 <h1>Casey's App View</h1>
 
 <await|timeline|=getTimeline()>
-  <for|{ post }| of=timeline.feed>
-    <const/uri=new AtUri(post.uri)>
-    <const/hostname=uri.hostname>
-    <const/rkey=uri.rkey>
-    <a href=`post/${hostname}/${rkey}`>
-      <p>${post.author.displayName}</p>
-      <p>${post.record.text}</p>
-      <hr>
-    </a>
+  <for|{ post }| of=timeline.feed>                                
+    <post post=post />
   </for>
 </await>
-
-<style>
-  a:has(p) {
-    color: inherit;
-    text-decoration: none;
-  }
-</style>

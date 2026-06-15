@@ -1,0 +1,27 @@
+import { AtUri } from "@atproto/syntax";
+import * as app from '../lexicons/app';
+
+export interface Input {
+    post: app.bsky.feed.defs.PostView
+}
+
+<script>
+    // BUG: Marko fails to load styles without this script tag present
+    console.log('test')
+</script>
+
+<const/uri=new AtUri(input.post.uri)>
+<const/hostname=uri.hostname>
+<const/rkey=uri.rkey>
+<a href=`post/${hostname}/${rkey}`>
+    <p>${input.post.author.displayName}</p>
+    <p>${input.post.record.text}</p>
+    <hr>
+</a>
+
+<style>
+  a:has(p) {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
