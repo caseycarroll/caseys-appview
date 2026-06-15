@@ -14,7 +14,7 @@ static async function getTimeline() {
   <h1>Casey's App View</h1>
 
   <await|timeline|=getTimeline()>
-    <ul role="list" class="flow">
+    <ul role="list" class="flow flow--large">
       <for|{ post }| of=timeline.feed>
         <li>
           <post post=post />

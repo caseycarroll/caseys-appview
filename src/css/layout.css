@@ -27,6 +27,10 @@
         margin-block-start: var(--flow-space, 1em);
     }
 
+    .flow--large > * + * {
+        margin-block-start: 1.5em;
+    }
+
     .cluster {
         display: flex;
         flex-wrap: wrap;
