@@ -12,7 +12,7 @@ This project is powered by [@marko/run](https://github.com/marko-js/run).
 ## Todo
  - external links (medium)
  - embeds
- - images in posts
+ - ~~images in posts~~
  - replies (medium)
  - ~~link to post page (low)~~
  - render thread on post page (low)

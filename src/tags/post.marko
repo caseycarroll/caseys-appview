@@ -1,4 +1,5 @@
 import { AtUri } from "@atproto/syntax";
+import { AppBskyEmbedImages } from '@atproto/api'
 import type { AppBskyFeedDefs } from '@atproto/api'
 
 export interface Input {
@@ -13,15 +14,21 @@ export interface Input {
 <const/uri=new AtUri(input.post.uri)>
 <const/hostname=uri.hostname>
 <const/rkey=uri.rkey>
-<a href=`post/${hostname}/${rkey}` class="flow">
-    <div class="cluster cluster--small">
-      <avatar 
-        src=`${input.post.author.avatar || ''}`
-        alt=`Avatar of ${input.post.author.displayName}`/>
-      <p class="text-bold">${input.post.author.displayName}</p>
-    </div>
-    <p>${input.post.record.text}</p>
-</a>
+
+<div class="flow">
+  <a href=`post/${hostname}/${rkey}` class="flow">
+      <div class="cluster cluster--small">
+        <avatar 
+          src=`${input.post.author.avatar || ''}`
+          alt=`Avatar of ${input.post.author.displayName}`/>
+        <p class="text-bold">${input.post.author.displayName}</p>
+      </div>
+      <p>${input.post.record.text}</p>
+  </a>
+  <if=AppBskyEmbedImages.isView(input.post.embed)>
+    <image-grid images=input.post.embed.images />
+  </if>
+</div>
 
 <style>
   a:has(p) {
