@@ -14,10 +14,11 @@ This project is powered by [@marko/run](https://github.com/marko-js/run).
  - embeds
  - images in posts
  - replies (medium)
- - link to post page (low)
+ - ~~link to post page (low)~~
  - render thread on post page (low)
  - view transition to post page (medium)
     - shared element transition with avatar, name and post text (medium)
 - production support oauth callback
 - DB for session mgmt (high)
+- pagination
 - ~~proper logout flow~~
