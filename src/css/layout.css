@@ -45,4 +45,10 @@
     .center {
         justify-content: center;
     }
+
+    .repel {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
 }

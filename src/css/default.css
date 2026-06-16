@@ -4,8 +4,16 @@
         background-color: hsl(51, 35%, 84%);
     }
 
+    body {
+        margin-block-start: 64px;
+    }
+
     ul[role="list"],
     ol[role="list"] {
         padding-inline-start: 0;
+    }
+
+    :is(h1, h2, h3, h4) {
+        margin: 0;
     }
 }

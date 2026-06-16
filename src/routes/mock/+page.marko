@@ -10,14 +10,17 @@ static async function getTimeline() {
   );
 }
 
-<section>
-  <h1>Casey's App View</h1>
+<section class="flow flow--large">
+  <div class="repel">
+    <h1>Timeline</h1>
+    <a href="/logout">Logout</a>
+  </div>
 
   <await|timeline|=getTimeline()>
     <ul role="list" class="flow flow--large">
       <for|{ post }| of=timeline.feed>
         <li>
-          <post post=post />
+          <post post=post/>
         </li>
       </for>
     </ul>
