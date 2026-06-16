@@ -18,4 +18,4 @@ This project is powered by [@marko/run](https://github.com/marko-js/run).
     - shared element transition with avatar, name and post text (medium)
 - production support oauth callback
 - DB for session mgmt (high)
-- proper logout flow
+- ~~proper logout flow~~
