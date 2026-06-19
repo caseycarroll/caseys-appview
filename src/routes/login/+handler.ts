@@ -5,7 +5,7 @@ export const POST: MarkoRun.Handler = async (context, next) => {
     try {
         const formData = await context.request.formData();
         const handle = formData.get('login');
-        console.log(handle)
+        
         if(!handle || typeof handle !== "string") {
             return new Response(
                 JSON.stringify({ error: "handle required"}), 
