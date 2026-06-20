@@ -1,26 +1,27 @@
 import { Agent, AppBskyFeedDefs } from "@atproto/api";
 import type { OAuthSession } from "@atproto/oauth-client-node";
 
-static async function getPostThread(session: OAuthSession, params: MarkoRun.Context["params"]) {
+static async function getPostThread(
+  session: OAuthSession,
+  params: MarkoRun.Context["params"],
+) {
   const agent = new Agent(session);
 
   const res = await agent.getPostThread({
-    uri: `at://${params.actor}/app.bsky.feed.post/${params.id}`
+    uri: `at://${params.actor}/app.bsky.feed.post/${params.id}`,
   });
   const { thread } = res.data;
-  if(AppBskyFeedDefs.isThreadViewPost(thread)) {
+  if (AppBskyFeedDefs.isThreadViewPost(thread)) {
     return thread;
   }
 }
 
-<section>
-    <if=$global.session>
-        <await|thread|=getPostThread($global.session, $global.params)>
-          <section id="streamed-content">
-            <if=thread>
-                <post post=thread.post />
-            </if>            
-          </section>
-        </await>
-    </if>
+<section id="streamed-content">
+  <if=$global.session>
+    <await|thread|=getPostThread($global.session, $global.params)>
+      <if=thread>
+        <post post=thread.post/>
+      </if>
+    </await>
+  </if>
 </section>

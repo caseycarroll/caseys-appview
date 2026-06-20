@@ -7,21 +7,19 @@ static async function getTimeline(session: OAuthSession) {
   return timeline.data;
 }
 <if=$global.session>
-  <section class="flow flow--large">
+  <section class="flow flow--large" id="streamed-content">
     <div class="repel">
       <h1>Timeline</h1>
       <a href="/logout">Logout</a>
     </div>
     <await|timeline|=getTimeline($global.session)>
-      <section id="streamed-content">
-        <ul role="list" class="flow flow--large">
-          <for|{ post }| of=timeline.feed>
-            <li>
-              <post post=post/>
-            </li>
-          </for>
-        </ul>
-      </section>
+      <ul role="list" class="flow flow--large">
+        <for|{ post }| of=timeline.feed>
+          <li>
+            <post post=post/>
+          </li>
+        </for>
+      </ul>
     </await>
   </section>
 </if>

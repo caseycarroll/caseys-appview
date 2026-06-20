@@ -15,7 +15,7 @@ export interface Input {
 <const/hostname=uri.hostname>
 <const/rkey=uri.rkey>
 
-<div class="flow">
+<div class="flow" style=`view-transition-name: post-${input.post.cid};`>
   <a href=`post/${hostname}/${rkey}` class="flow">
       <div class="cluster cluster--small">
         <avatar 
