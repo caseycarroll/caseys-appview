@@ -1,9 +1,11 @@
 import type { OAuthSession } from "@atproto/oauth-client-node";
 import { getSession } from "../auth/session";
+import type { AppBskyFeedDefs } from "@atproto/api";
 
 declare module "@marko/run" {
   interface Context {
     session: OAuthSession | null;
+    thread: AppBskyFeedDefs.ThreadViewPost
   }
 }
 

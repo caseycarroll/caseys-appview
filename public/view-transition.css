@@ -1,0 +1,8 @@
+@view-transition {
+  navigation: auto;
+}
+
+html[style],
+html {
+  visibility: visible !important;
+}
