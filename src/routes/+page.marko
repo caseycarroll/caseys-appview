@@ -13,13 +13,15 @@ static async function getTimeline(session: OAuthSession) {
       <a href="/logout">Logout</a>
     </div>
     <await|timeline|=getTimeline($global.session)>
-      <ul role="list" class="flow flow--large">
-        <for|{ post }| of=timeline.feed>
-          <li>
-            <post post=post/>
-          </li>
-        </for>
-      </ul>
+      <section id="streamed-content">
+        <ul role="list" class="flow flow--large">
+          <for|{ post }| of=timeline.feed>
+            <li>
+              <post post=post/>
+            </li>
+          </for>
+        </ul>
+      </section>
     </await>
   </section>
 </if>

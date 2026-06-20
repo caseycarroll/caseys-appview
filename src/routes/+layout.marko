@@ -11,6 +11,7 @@ import '../css/layout.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A basic Marko app.">
     <title>${$global.meta.pageTitle || "Marko"}</title>
+    <link blocking="render" href="#streamed-content" rel="expect">
   </head>
   <body>
     <${input.content}/>

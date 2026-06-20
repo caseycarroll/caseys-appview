@@ -16,9 +16,11 @@ static async function getPostThread(session: OAuthSession, params: MarkoRun.Cont
 <section>
     <if=$global.session>
         <await|thread|=getPostThread($global.session, $global.params)>
+          <section id="streamed-content">
             <if=thread>
                 <post post=thread.post />
-            </if>
+            </if>            
+          </section>
         </await>
     </if>
 </section>
