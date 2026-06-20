@@ -5,7 +5,8 @@ import type { AppBskyFeedDefs } from '@atproto/api'
 export interface Input {
     post: AppBskyFeedDefs.PostView,
     isPrimary?: boolean;
-    href?: string; 
+    href?: string;
+    isReply?: boolean;
 }
 
 <script>
@@ -18,7 +19,7 @@ export interface Input {
 <const/rkey=uri.rkey>
 
 <li 
-  class="flow post"
+  class=`flow post ${input.isReply && 'reply'}`
   style=`view-transition-name: post-${input.post.cid.replace(/[^a-zA-Z]/g, '').slice(0, 10)};`
   id=input.isPrimary && 'main-post'
   >
@@ -49,6 +50,22 @@ export interface Input {
   .post {
     --flow-space: var(--space-xl);
     scroll-margin-top: 2em;
+
+    &.reply {
+      position: relative;
+      padding-inline: var(--space-m);
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background-color: oklch(50.823% 0.04791 97.309);
+        border-radius: 10px;
+        content: '';
+
+      }
+    }
 
     &#main-post {
       --flow-space: var(--space-2xl);
