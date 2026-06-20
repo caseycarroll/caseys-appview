@@ -1,5 +1,6 @@
 import { AtUri } from "@atproto/syntax";
-import { AppBskyEmbedImages } from '@atproto/api'
+import * as app from '../lexicons/app';
+// import { AppBskyEmbedImages } from '@atproto/api'
 import type { AppBskyFeedDefs } from '@atproto/api'
 
 export interface Input {
@@ -33,7 +34,7 @@ export interface Input {
       </div>
       <p>${input.post.record.text}</p>
   </a>
-  <if=AppBskyEmbedImages.isView(input.post.embed)>
+  <if=app.bsky.embed.images.view.$matches(input.post.embed)>
     <image-grid images=input.post.embed.images />
   </if>
 </li>

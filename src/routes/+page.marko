@@ -1,11 +1,14 @@
-import { Agent } from "@atproto/api";
-import type { OAuthSession } from "@atproto/oauth-client-node";
-
-static async function getTimeline(session: OAuthSession) {
-  const agent = new Agent(session);
-  const timeline = await agent.getTimeline({ limit: 20 });
-  return timeline.data;
+server {
+  import { Agent } from "@atproto/api";
+  import type { OAuthSession } from "@atproto/oauth-client-node";
+  
+  async function getTimeline(session: OAuthSession) {
+    const agent = new Agent(session);
+    const timeline = await agent.getTimeline({ limit: 20 });
+    return timeline.data;
+  }
 }
+
 <if=$global.session>
   <section class="flow flow--large" id="streamed-content">
     <div class="repel">
