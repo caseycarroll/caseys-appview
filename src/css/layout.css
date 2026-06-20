@@ -1,11 +1,23 @@
 @layer layout {
     :root {
-        --flow-space: 1em;
+        --space-s: clamp(1rem, 0.8977rem + 0.4545vw, 1.25rem);
+        --space-m: clamp(1.5rem, 1.3466rem + 0.6818vw, 1.875rem);
+        --space-l: clamp(2rem, 1.7955rem + 0.9091vw, 2.5rem);
+        --space-xl: clamp(3rem, 2.6932rem + 1.3636vw, 3.75rem);
+        --space-2xl: clamp(4rem, 3.5909rem + 1.8182vw, 5rem);
+        --space-3xl: clamp(6rem, 5.3864rem + 2.7273vw, 7.5rem);
+
+        /* One-up pairs */
+        --space-s-m: clamp(1rem, 0.642rem + 1.5909vw, 1.875rem);
+        --space-m-l: clamp(1.5rem, 1.0909rem + 1.8182vw, 2.5rem);
+        --space-l-xl: clamp(2rem, 1.2841rem + 3.1818vw, 3.75rem);
+        --space-xl-2xl: clamp(3rem, 2.1818rem + 3.6364vw, 5rem);
+        --space-2xl-3xl: clamp(4rem, 2.5682rem + 6.3636vw, 7.5rem);
     }
-    
+
     body {
         display: grid;
-        grid-template-columns: minmax(1rem, 1fr) minmax(0,60ch) minmax(1rem, 1fr);
+        grid-template-columns: minmax(1rem, 1fr) minmax(0, 60ch) minmax(1rem, 1fr);
         grid-template-areas: ". main .";
     }
 
@@ -17,18 +29,15 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        --flow-space: var(--space);
     }
 
-    .flow > * {
+    .flow>* {
         margin-block: 0;
     }
 
-    .flow > * + * {
+    .flow>*+* {
         margin-block-start: var(--flow-space, 1em);
-    }
-
-    .flow--large > * + * {
-        margin-block-start: 1.5em;
     }
 
     .cluster {

@@ -19,9 +19,7 @@ static async function getTimeline() {
   <await|timeline|=getTimeline()>
     <ul role="list" class="flow flow--large">
       <for|{ post }| of=timeline.feed>
-        <li>
-          <post post=post/>
-        </li>
+          <post post=post href="mock/post#main-post"/>
       </for>
     </ul>
   </await>

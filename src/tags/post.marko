@@ -3,7 +3,9 @@ import { AppBskyEmbedImages } from '@atproto/api'
 import type { AppBskyFeedDefs } from '@atproto/api'
 
 export interface Input {
-    post: AppBskyFeedDefs.PostView
+    post: AppBskyFeedDefs.PostView,
+    isPrimary?: boolean;
+    href?: string; 
 }
 
 <script>
@@ -15,8 +17,13 @@ export interface Input {
 <const/hostname=uri.hostname>
 <const/rkey=uri.rkey>
 
-<div class="flow" style=`view-transition-name: post-${input.post.cid.replace(/[^a-zA-Z]/g, '').slice(0, 10)};`>
-  <a href=`post/${hostname}/${rkey}` class="flow">
+<li 
+  class="flow post"
+  style=`view-transition-name: post-${input.post.cid.replace(/[^a-zA-Z]/g, '').slice(0, 10)};`
+  id=input.isPrimary && 'main-post'
+  >
+  <let/href=input.href || `post/${hostname}/${rkey}`>
+  <a href=href class="flow">
       <div class="cluster cluster--small">
         <avatar 
           src=`${input.post.author.avatar || ''}`
@@ -28,7 +35,7 @@ export interface Input {
   <if=AppBskyEmbedImages.isView(input.post.embed)>
     <image-grid images=input.post.embed.images />
   </if>
-</div>
+</li>
 
 <style>
   a:has(p) {
@@ -36,6 +43,18 @@ export interface Input {
     text-decoration: none;
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  .post {
+    --flow-space: var(--space-xl);
+    scroll-margin-top: 2em;
+
+    &#main-post {
+      --flow-space: var(--space-2xl);
+      &+.post {
+        --flow-space: var(--space-2xl);
+      }
     }
   }
 </style>

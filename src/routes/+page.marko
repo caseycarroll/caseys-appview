@@ -15,9 +15,7 @@ static async function getTimeline(session: OAuthSession) {
     <await|timeline|=getTimeline($global.session)>
       <ul role="list" class="flow flow--large">
         <for|{ post }| of=timeline.feed>
-          <li>
             <post post=post/>
-          </li>
         </for>
       </ul>
     </await>

@@ -1,0 +1,18 @@
+import { AppBskyFeedDefs } from '@atproto/api';
+import mockThread from '../../../../mocks/post-mock';
+
+<define/UnrollReplies|input: { replies: AppBskyFeedDefs.ThreadViewPost[]}|>
+    <for|reply| of=input.replies>
+        <post post=reply.post />
+        <if=reply.replies>
+            <UnrollReplies replies=reply.replies as AppBskyFeedDefs.ThreadViewPost[] />
+        </if>
+    </for>
+</define>
+
+<section class="flow flow--xlarge">
+    <post post=mockThread.parent.post />
+    <post isPrimary post=mockThread.post />
+    
+    <UnrollReplies replies=mockThread.replies as AppBskyFeedDefs.ThreadViewPost[] />
+</section>
